@@ -1,8 +1,4 @@
-#**Behavioral Cloning**
-
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+# **Behavioral Cloning**
 
 ---
 
@@ -26,12 +22,12 @@ The goals / steps of this project are the following:
 [output]: ./examples/output.png "Output"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Files Submitted & Code Quality
+### Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -53,7 +49,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolutional neural network with 5x5 and depths between 24 and 48. It is a reimplementation of the Nvidia architecture used in the lectures. It uses RELU layers to add nonlinearity (lines 61-66), and normalizes the data (line 55).
+My model consists of a convolutional neural network with filter size 5x5 and depths between 24 and 48. It is a reimplementation of the Nvidia architecture used in the lectures. It uses RELU layers to add nonlinearity (lines 61-66), and normalizes the data (line 55).
 
 My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24)
 
@@ -88,23 +84,13 @@ The overall strategy for deriving a model architecture was to use the suggested 
 
 Initially this was a failure, as the custom training set was not comprehensive enough. As the first iteration consisted of only going around the track in one direction, the training set had a statistical leaning towards turning in one direction, causing it to go in circles.
 
-Upon augmenting the data with laps in both directions, it could successfully take a straigh
+Upon augmenting the data with laps in both directions, it would successfully drive forwards, but couldnt turn properly.
 
- The data set was focu Due to only lapping as it only
+I then trained the car to correct by recording recovering from swerving on both sides of the road. This seemed to give the car the ability to self correct if it took a corner to sharply.
 
-The overall strategy for deriving a model architecture was to ...
+This proved to be largely successful, bar some strange behavior on the bridge. This was remedied by doing an additional 10 laps in each direction.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting.
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ...
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+Overfitting was largely avoided by not training for very long. Scientifically not very accurate, but I was training on a 7 year old desktop and its not exactly a powerhouse.
 
 ####2. Final Model Architecture
 
@@ -127,11 +113,8 @@ The final model architecture consisted on the following convolutional neural net
 | RELU |  |
 | Flatten | Outputs 1584|
 | Fully Connected | Outputs 100 |
-| Dropout | 20% dropped |
 | Fully Connected | Outputs 50 |
-| Dropout | 20% dropped |
 | Fully Connected | Outputs 10 |
-| Dropout | 20% dropped |
 | Fully Connected | Outputs 1 |
 
 ####3. Creation of the Training Set & Training Process
@@ -145,9 +128,6 @@ Unfortunately this dataset was not enough to adequately train the model, and the
 I added to the dataset by doing 5 laps in the other direction. This caused the car to drive straight until it hit a corner where it would turn a little, then decide to go out on its own in the world and explore the bottom of the lake. Obviously this is unintended functionality.
 
 I then trained the car to correct by recording recovering from swerving on both sides of the road. This seemed to give the car the ability to self correct if it took a corner to sharply.
-
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
 ![alt text][recovery_1]
 Nearing the edge of the road
