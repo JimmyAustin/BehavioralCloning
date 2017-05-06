@@ -57,7 +57,7 @@ The model includes RELU layers to introduce nonlinearity (code line 20), and the
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 77). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model includes dropout layers to avoid overfitting.
 
 #### 3. Model parameter tuning
 
@@ -113,8 +113,11 @@ The final model architecture consisted on the following convolutional neural net
 | RELU |  |
 | Flatten | Outputs 1584|
 | Fully Connected | Outputs 100 |
+| Dropout | 20% |
 | Fully Connected | Outputs 50 |
+| Dropout | 20% |
 | Fully Connected | Outputs 10 |
+| Dropout | 20% |
 | Fully Connected | Outputs 1 |
 
 ####3. Creation of the Training Set & Training Process
